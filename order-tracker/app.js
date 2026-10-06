@@ -2,28 +2,30 @@ console.log("Order tracker app started");
 
 class OrderHistoryStack {
     constructor() {
-        this.orders = [];
+        this.items = [];
     }
 
-    push(order) {
-        this.orders.push(order);
+    Add(order) {
+        this.items.push(order);
     }
 
-    pop () {
-        return this.orders.pop();
+    Remove() {
+        return this.items.pop();
 
     }
 
-    peek() {  
-        return this.orders[this.orders.length - 1];
+    Check  () {  
+        const index = this.items.length - 1;
+        console.log("index: ", index);
+        return this.items[index];
     }
 
     size() {
-        return this.orders.length;
+        return this.items.length;
     }
 
     isEmpty() {
-        return this.orders.length === 0;
+        return this.items.length === 0;
     }
 }
 
@@ -59,12 +61,12 @@ const order4 = {
 
 const history = new OrderHistoryStack();
 
-history.push(order1);
-history.push(order2);
-history.push(order3);
-history.push(order4);
+history.Add(order1);
+history.Add(order2);
+history.Add(order3);
+history.Add(order4);
 
 console.log(history.size());
 console.log(history.isEmpty());
-console.log(history.peek());
-console.log(history.pop());
+console.log(history.Check  ());
+console.log(history.Remove());
