@@ -79,3 +79,7 @@ class OrderQueue {
     }
 
 }
+const orderHistory = new OrderHistoryStack();
+console.log("orderHistory: ", orderHistory);
+const orderQueue = new OrderQueue(5);
+console.log("orderQueue: ", orderQueue);
