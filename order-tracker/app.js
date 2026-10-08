@@ -31,42 +31,51 @@ class OrderHistoryStack {
 
 
 class OrderQueue {  
+    constructor(capacity) {
+        if (capacity <= 0 || !Number.isInteger(capacity)) {
+            throw new Error("Capacity must be a positive integer");
+        }
+        this.capacity = capacity;
+        this.items = new Array(capacity);
+        this.head = 0;
+        this.tail = 0;
+        this.count = 0;
+    }
 
+    add(order) {
+        if (this.isFull()) {
+            throw new Error("Queue is full");
+        }
+        this.items[this.tail] = order;
+        const nextTail = (this.tail + 1) % this.capacity;
+        console.log('nextTail', nextTail);
+        this.tail = nextTail;
+        this.count++;
+    }
+
+
+    remove() {
+        if (this.isEmpty()) {
+            throw new Error("Queue is empty");
+        }
+        const order = this.items[this.head];
+        this.items[this.head] = undefined;
+        const nextHead = (this.head + 1) % this.capacity;
+        console.log('nextHead', nextHead);
+        this.head = nextHead;
+        this.count--;
+        return order;
+    }
+
+
+    isFull() {
+        return this.count === this.capacity;
+    }
+    isEmpty() {
+        return this.count === 0;
+    }
+    size() {
+        return this.count;
+    }
 
 }
-
-const order1 = {
-    orderNumber: 1987,
-    customer: "Jordan",
-    item: "32 racoons"
-};
-
-const order2 = {
-    orderNumber: 2794,
-    customer: "joe",
-    item: "lucky charms"
-};
-
-const order3 = {
-    orderNumber: 7230,
-    customer: "blake",
-    item: "a bomb"
-};
-
-const order4 = {
-    orderNumber: 400,
-    customer: "snoop dogg",
-    item: "17 assorted cheese cakes"
-};
-
-const history = new OrderHistoryStack();
-
-history.Add(order1);
-history.Add(order2);
-history.Add(order3);
-history.Add(order4);
-
-console.log(history.size());
-console.log(history.isEmpty());
-console.log(history.Check  ());
-console.log(history.Remove());
