@@ -77,13 +77,53 @@ class OrderQueue {
     size() {
         return this.count;
     }
-
-    
-
-    
-
 }
-const orderHistory = new OrderHistoryStack();
-console.log("orderHistory: ", orderHistory);
+
+const order1 = {
+    orderNumber: 1001,
+    customer: "George",
+    item: "Keyboard"
+};
+    const order2 = {
+    orderNumber: 1111,
+    customer: "Jordan",
+    item: "17 cheese wheels"
+};
+    const order3 = {
+    orderNumber: 1374,
+    customer: "LeBron",
+    item: "a pipebomb"
+};
+    const order4 = {
+    orderNumber: 1539,
+    customer: "Goku",
+    item: "300 punds of rice"
+};
+    const order5 = {
+    orderNumber: 1987,
+    customer: "Springtrap",
+    item: "pizza"
+};
+
+
+const orderHistory = new OrderHistoryStack(5);
 const orderQueue = new OrderQueue(5);
-console.log("orderQueue: ", orderQueue);
+
+orderHistory.Add(order1);
+orderHistory.Add(order2);
+orderHistory.Add(order3);
+orderHistory.Add(order4);
+orderHistory.Add(order5);
+
+orderQueue.add(order1);
+orderQueue.add(order2);
+orderQueue.add(order3);
+orderQueue.add(order4);
+orderQueue.add(order5);
+
+console.log("orderHistory: ", orderHistory);
+console.log("Last order in history: ", orderHistory.Check());
+console.log("Queue size before removal: ", orderQueue.size());
+console.log("Next order to process: ", orderQueue.remove());
+console.log("Queue size after removal: ", orderQueue.size());
+console.log("Removed from history: ", orderHistory.Remove());
