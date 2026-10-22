@@ -58,6 +58,22 @@ function linearSearch(array, target) {
     return null;
 }
 
+    function binarySearch(array, target) { ///look into this at home
+        let left = 0;
+        let right = array.length - 1;
 
-const result = linearSearch(packages, "PKG1002");
-console.log(result);
+        while (left <= right) {
+            const mid = Math.floor((left + right) / 2);
+            if (array[mid].trackingNumber === target) {
+                return array[mid];
+            } else if (array[mid].trackingNumber < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return null;
+    }
+
+console.log(linearSearch(packages, "PKG1008"));
+console.log(binarySearch(packages.sort((a, b) => a.trackingNumber.localeCompare(b.trackingNumber)), "PKG1008"));
