@@ -2,10 +2,20 @@ class Graph {
   constructor() {
     this.adjacencyList = new Map();
   }
+  addLocation(location) {
+      if (!this.adjacencyList.has(location)) {
+        return false;
+      }
+      if (!this.adjacencyList.set(location, [])) {
+        return true;
+        }
+    }
+}
 
-  }
 
 const deliveryGraph = new Graph();
 deliveryGraph.addLocation("Warehouse");
 deliveryGraph.addLocation("Downtown");
 deliveryGraph.addLocation("Airport");
+
+console.log(deliveryGraph.adjacencyList);
