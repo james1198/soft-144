@@ -3,12 +3,11 @@ class Graph {
     this.adjacencyList = new Map();
   }
   addLocation(location) {
-      if (!this.adjacencyList.has(location)) {
+      if (this.adjacencyList.has(location)) {
         return false;
       }
-      if (!this.adjacencyList.set(location, [])) {
-        return true;
-        }
+      this.adjacencyList.set(location, []);
+      return true;
     }
 }
 
