@@ -51,6 +51,25 @@ class Graph {
   hadRoad(location1, location2) {
     return this.hasRoad(location1, location2);
   }
+  getConnections(location) {
+    if(!this.adjacencyList.has(location)) {
+      return [];
+    }
+    return this.adjacencyList.get(location);  
+  }
+  removeRoad(location1, location2) {
+    if(!this.adjacencyList.has(location1) || !this.adjacencyList.has(location2)) {
+      return false;
+    }
+    const roads1 = this.adjacencyList.get(location1);
+    const roads2 = this.adjacencyList.get(location2);
+
+  roads1.splice(roads1.indexOf(location2), 1);
+  roads2.splice(roads2.indexOf(location1), 1);
+
+
+    return true;
+  }
 }
 
 const deliveryGraph = new Graph();
@@ -77,3 +96,7 @@ for (const [location, roads] of deliveryGraph.adjacencyList.entries()) {
 console.log(deliveryGraph.hasLocation("Warehouse")); // true
 console.log(deliveryGraph.hasLocation("Mall")); // false
 console.log(deliveryGraph.hasRoad("Warehouse", "Downtown")); // true
+console.log(deliveryGraph.getConnections("Warehouse")); // ["Downtown", "Airport"]
+console.log(deliveryGraph.getConnections("Airport")); // ["Warehouse", "North Station"]
+console.log(deliveryGraph.getConnections("Mall")); // []
+console.log("before")
