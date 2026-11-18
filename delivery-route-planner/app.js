@@ -23,6 +23,10 @@ class Graph {
     const roads1 = this.adjacencyList.get(location1);
     const roads2 = this.adjacencyList.get(location2);
 
+    if (!this.hasRoad(location1, location2)) {
+      return false;
+    }
+
     if (roads1.includes(location2) || roads2.includes(location1)) {
       return false;
     }
@@ -66,10 +70,20 @@ class Graph {
 
   roads1.splice(roads1.indexOf(location2), 1);
   roads2.splice(roads2.indexOf(location1), 1);
-
-
     return true;
   }
+  removeLocation(location) {
+    if(!this.hasLocation(location)) {
+      return false;
+    }
+    for (const connectedLocation of this.adjacencyList.get(location)) {
+    this.removeRoad(location, connectedLocation);
+  }
+
+  this.adjacencyList.delete(location);
+
+  return true;
+}
 }
 
 const deliveryGraph = new Graph();
@@ -99,4 +113,12 @@ console.log(deliveryGraph.hasRoad("Warehouse", "Downtown")); // true
 console.log(deliveryGraph.getConnections("Warehouse")); // ["Downtown", "Airport"]
 console.log(deliveryGraph.getConnections("Airport")); // ["Warehouse", "North Station"]
 console.log(deliveryGraph.getConnections("Mall")); // []
-console.log("before")
+console.log("Before:", deliveryGraph.getConnections("Warehouse"));
+console.log("Removed:", deliveryGraph.removeRoad("Warehouse", "Airport"));
+console.log("After:", deliveryGraph.getConnections("Warehouse"));
+console.log("Remove again:", deliveryGraph.removeRoad("Warehouse", "Airport"));
+console.log("Before:", deliveryGraph.getConnections("Airport"));
+console.log("Removed:", deliveryGraph.removeLocation("Airport"));
+console.log("Exists:", deliveryGraph.hasLocation("Airport"));
+console.log("Warehouse:", deliveryGraph.getConnections("Warehouse"));
+console.log("North Station:", deliveryGraph.getConnections("North Station"));
