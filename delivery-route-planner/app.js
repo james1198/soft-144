@@ -23,10 +23,6 @@ class Graph {
     const roads1 = this.adjacencyList.get(location1);
     const roads2 = this.adjacencyList.get(location2);
 
-    if (!this.hasRoad(location1, location2)) {
-      return false;
-    }
-
     if (roads1.includes(location2) || roads2.includes(location1)) {
       return false;
     }
@@ -68,6 +64,10 @@ class Graph {
     const roads1 = this.adjacencyList.get(location1);
     const roads2 = this.adjacencyList.get(location2);
 
+    if (!this.hasRoad(location1, location2)) {
+  return false;
+}
+
   roads1.splice(roads1.indexOf(location2), 1);
   roads2.splice(roads2.indexOf(location1), 1);
     return true;
@@ -76,7 +76,7 @@ class Graph {
     if(!this.hasLocation(location)) {
       return false;
     }
-    for (const connectedLocation of this.adjacencyList.get(location)) {
+    for (const connectedLocation of [...this.adjacencyList.get(location)]) {
     this.removeRoad(location, connectedLocation);
   }
 
@@ -122,3 +122,6 @@ console.log("Removed:", deliveryGraph.removeLocation("Airport"));
 console.log("Exists:", deliveryGraph.hasLocation("Airport"));
 console.log("Warehouse:", deliveryGraph.getConnections("Warehouse"));
 console.log("North Station:", deliveryGraph.getConnections("North Station"));
+console.log("Hospital:", deliveryGraph.getConnections("Hospital"));
+console.log("Airport still exists:", deliveryGraph.hasLocation("Airport"));
+console.log("Remove Airport again:", deliveryGraph.removeLocation("Airport"));
